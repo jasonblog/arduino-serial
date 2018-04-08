@@ -189,10 +189,12 @@ int main(int argc, char *argv[])
             break;
         case 'r':
             if( fd == -1 ) error("serial port not opened");
-            memset(buf,0,buf_max);  //
-            serialport_read_until(fd, buf, eolchar, buf_max, timeout);
-            if( !quiet ) printf("read string:");
-            printf("%s\n", buf);
+            memset(buf,0,buf_max);  
+            // if( !quiet ) printf("read string:");
+            while(1) {
+                serialport_read_until(fd, buf, eolchar, buf_max, timeout);
+                printf("%s\n", buf);
+            }
             break;
         case 'F':
             if( fd == -1 ) error("serial port not opened");
